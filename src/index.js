@@ -6,5 +6,5 @@ const game = new Game('game', 512, 256);
 
 (function gameLoop() {
   game.render();
-  requestAnimationFrame(gameLoop);
+  requestAnimationFrame(gameLoop); //Comment out to turn this off for debugging.
 })();
