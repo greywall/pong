@@ -1,7 +1,16 @@
-import { SVG_NS } from "../settings";
+import { SVG_NS, KEYS } from "../settings";
 
 export default class Paddle {
-  constructor(boardHeight, width, height, x, y, color = "green", up, down) {
+  constructor(
+    boardHeight,
+    width,
+    height,
+    x,
+    y,
+    color = "green",
+    upKey,
+    downKey
+  ) {
     this.boardHeight = boardHeight;
     this.width = width;
     this.height = height;
@@ -10,6 +19,18 @@ export default class Paddle {
     this.speed = 10;
     this.score = 0;
     this.color = color;
+    this.upKey = upKey;
+    this.downKey = downKey;
+
+    this.keyState = {};
+
+    document.addEventListener("keydown", event => {
+      this.keyState[event.key] = true;
+    });
+
+    document.addEventListener("keyup", event => {
+      this.keyState[event.key] = false;
+    });
 
     document.addEventListener("keydown", event => {
       switch (event.key) {
@@ -36,6 +57,22 @@ export default class Paddle {
   }
 
   render(svg) {
+    if (this.keyState[KEYS.a] && this.upKey === KEYS.a) {
+      this.up();
+    }
+
+    if (this.keyState[KEYS.z] && this.downKey === KEYS.z) {
+      this.down();
+    }
+
+    if (this.keyState[KEYS.up] && this.upKey === KEYS.up) {
+      this.up();
+    }
+
+    if (this.keyState[KEYS.down] && this.downKey === KEYS.down) {
+      this.down();
+    }
+
     let rect = document.createElementNS(SVG_NS, "rect");
     // rect.setAttributeNS(null, "fill", "white");
     rect.setAttributeNS(null, "width", this.width);

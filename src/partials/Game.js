@@ -39,12 +39,27 @@ export default class Game {
     );
 
     this.ball = new Ball(8, this.width, this.height, "black");
+    this.ball2 = new Ball(8, this.width, this.height, "white");
+    this.ball3 = new Ball(8, this.width, this.height, "white");
+    this.ball4 = new Ball(8, this.width, this.height, "white");
+
+    document.addEventListener("keydown", event => {
+      switch (event.key) {
+        case KEYS.spaceBar:
+          this.pause = !this.pause;
+          break;
+      }
+    });
 
     // this.player1 = new Paddle(this.height, 8, 56, 10,100, '#f69d3c' );
     // this.player2 = new Paddle(this.height, 8, 56, 494,100,'#3f87a6');
   } //end of constructor
 
   render() {
+    if (this.pause) {
+      return;
+    }
+
     this.gameElement.innerHTML = ""; //clear the html before appending to fix the render bug
     let svg = document.createElementNS(SVG_NS, "svg");
     svg.setAttributeNS(null, "width", this.width);
@@ -55,5 +70,8 @@ export default class Game {
     this.player1.render(svg);
     this.player2.render(svg);
     this.ball.render(svg);
+    this.ball2.render(svg);
+    this.ball3.render(svg);
+    this.ball4.render(svg);
   }
 }
