@@ -13,5 +13,5 @@ constructor(...args) {
 //import this sheet into game.js
 
 
-this.powerup = new PowerUp (ball properties) //this is on the second ball
+// this.powerup = new PowerUp (ball properties) //this is on the second ball
 //update the 

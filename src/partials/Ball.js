@@ -17,7 +17,7 @@ export default class Ball {
 
     this.vy = 0;
     while (this.vy === 0) {
-      this.vy = Math.floor(Math.random() * 10 - 5);
+      this.vy = Math.random() * 10 - 5;
     }
     console.log("vy", this.vy);
 
@@ -40,11 +40,45 @@ export default class Ball {
     }
   }
 
-  render(svg) {
+  paddleCollision(player1, player2) {
+    // moving right
+
+    // console.log("player1", player1);
+    // console.log("player2", player2);
+
+    if (this.vx > 0) {
+      // collision detection for right paddle
+      if (
+        this.x + this.radius >= player2.x && // right edge of the ball is >= left edge of the paddle
+        this.x + this.radius <= player2.x + player2.width && // right edge of the ball is <= right edge of the paddle
+        (this.y >= player2.y && this.y <= player2.y + player2.height) // ball Y is >= paddle top Y and <= paddle bottom Y
+      ) {
+        // if true then there's a collision
+        this.vx *= -1;
+        //this.player1.height -=-5 this will decrease player1s height for hitting the ball. //or change player color after hit, player1.height -=5; setTimeout(function()) {reset color,} 200
+        //let player2.color = 'red' setTimeout(function()) {player2.color= playercolor;} 200;
+      }
+    } else {
+      // moving left
+      if (
+        this.x - this.radius <= player1.x + player1.width &&
+        this.x - this.radius >= player1.x &&
+        (this.y >= player1.y && this.y <= player1.y + player1.height)
+      ) {
+        this.vx *= -1;
+      }
+    }
+  }
+
+  render(svg, player1, player2) {
+    //need to add player 1, player 2
     this.x += this.vx; //+= this.ax
     this.y += this.vy;
 
+    console.log(player1);
+
     this.wallCollision();
+    this.paddleCollision(player1, player2);
 
     let circle = document.createElementNS(SVG_NS, "circle");
     circle.setAttributeNS(null, "r", this.radius);

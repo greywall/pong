@@ -38,7 +38,7 @@ export default class Game {
       KEYS.z
     );
 
-    this.ball = new Ball(8, this.width, this.height, "black");
+    this.ball = new Ball(8, this.width, this.height, "gold");
     this.ball2 = new Ball(8, this.width, this.height, "white");
     this.ball3 = new Ball(8, this.width, this.height, "white");
     this.ball4 = new Ball(8, this.width, this.height, "white");
@@ -69,9 +69,9 @@ export default class Game {
     this.board.render(svg);
     this.player1.render(svg);
     this.player2.render(svg);
-    this.ball.render(svg);
-    this.ball2.render(svg);
-    this.ball3.render(svg);
-    this.ball4.render(svg);
+    this.ball.render(svg, this.player1, this.player2);
+    // this.ball2.render(svg);
+    // this.ball3.render(svg);
+    // this.ball4.render(svg);
   }
 }
