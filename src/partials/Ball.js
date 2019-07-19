@@ -1,4 +1,5 @@
 import { SVG_NS } from "../settings";
+import pingSound from "../../public/sounds/pong-01.wav";
 
 export default class Ball {
   constructor(radius, boardWidth, boardHeight, color = "white") {
@@ -7,6 +8,8 @@ export default class Ball {
     this.boardHeight = boardHeight;
     this.direction = 1;
     this.color = color;
+
+    this.ping = new Audio(pingSound);
 
     this.reset();
   }
@@ -55,6 +58,8 @@ export default class Ball {
       ) {
         // if true then there's a collision
         this.vx *= -1;
+
+        this.ping.play();
         //this.player1.height -=-5 this will decrease player1s height for hitting the ball. //or change player color after hit, player1.height -=5; setTimeout(function()) {reset color,} 200
         //let player2.color = 'red' setTimeout(function()) {player2.color= playercolor;} 200;
       }
@@ -66,8 +71,16 @@ export default class Ball {
         (this.y >= player1.y && this.y <= player1.y + player1.height)
       ) {
         this.vx *= -1;
+        this.ping.play();
       }
     }
+  }
+
+  goal(player) {
+    player.score++;
+
+    // console.log(player1.score);
+    this.reset();
   }
 
   render(svg, player1, player2) {
@@ -75,7 +88,7 @@ export default class Ball {
     this.x += this.vx; //+= this.ax
     this.y += this.vy;
 
-    console.log(player1);
+    // console.log(player1);
 
     this.wallCollision();
     this.paddleCollision(player1, player2);
@@ -86,5 +99,16 @@ export default class Ball {
     circle.setAttributeNS(null, "cy", this.y);
     circle.setAttributeNS(null, "fill", this.color);
     svg.appendChild(circle); //append passes svg to parent.
+
+    const rightGoal = this.x + this.radius >= this.boardWidth;
+    const leftGoal = this.x - this.radius <= 0;
+
+    if (rightGoal) {
+      this.goal(player1);
+      this.direction = 1;
+    } else if (leftGoal) {
+      this.goal(player2);
+      this.direction = -1;
+    }
   }
 }

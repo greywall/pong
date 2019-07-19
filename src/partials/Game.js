@@ -1,6 +1,8 @@
 import Board from "./Board";
 import Paddle from "./Paddle";
 import Ball from "./Ball";
+import Score from "./Score";
+
 import { SVG_NS, KEYS, PaddleOptions } from "../settings";
 
 export default class Game {
@@ -15,6 +17,9 @@ export default class Game {
     // this.paddleWidth = 8;
     // this.paddleHeight = 56;
     // this.boardGap = 10;
+
+    //this.gameball = false
+    //this.gameball = true
 
     this.player1 = new Paddle(
       this.height, //board height
@@ -38,6 +43,9 @@ export default class Game {
       KEYS.z
     );
 
+    this.score1 = new Score(this.width / 2 - 50, 30, 30); //location of score board
+    this.score2 = new Score(this.width / 2 + 50, 30, 30);
+
     this.ball = new Ball(8, this.width, this.height, "gold");
     this.ball2 = new Ball(8, this.width, this.height, "white");
     this.ball3 = new Ball(8, this.width, this.height, "white");
@@ -55,6 +63,8 @@ export default class Game {
     // this.player2 = new Paddle(this.height, 8, 56, 494,100,'#3f87a6');
   } //end of constructor
 
+  //mega pong write method for spawning additonal balls. use an array of new ball objects and use a for.Each() to render each ball.
+
   render() {
     if (this.pause) {
       return;
@@ -70,8 +80,11 @@ export default class Game {
     this.player1.render(svg);
     this.player2.render(svg);
     this.ball.render(svg, this.player1, this.player2);
-    // this.ball2.render(svg);
-    // this.ball3.render(svg);
-    // this.ball4.render(svg);
+    this.ball2.render(svg, this.player1, this.player2); //can call mega ball here.
+    this.ball3.render(svg, this.player1, this.player2);
+    this.ball4.render(svg, this.player1, this.player2);
+
+    this.score1.render(svg, this.player1.score);
+    this.score2.render(svg, this.player2.score);
   }
 }
