@@ -2,8 +2,10 @@ import Board from "./Board";
 import Paddle from "./Paddle";
 import Ball from "./Ball";
 import Score from "./Score";
+import Goldenball from "./Goldenball";
 
 import { SVG_NS, KEYS, PaddleOptions } from "../settings";
+import { CLIENT_RENEG_LIMIT } from "tls";
 
 export default class Game {
   constructor(element, width, height) {
@@ -29,7 +31,8 @@ export default class Game {
       (this.height - PaddleOptions.paddleHeight) / 2,
       "red",
       KEYS.up,
-      KEYS.down
+      KEYS.down,
+      1
     );
 
     this.player2 = new Paddle(
@@ -40,16 +43,17 @@ export default class Game {
       (this.height - PaddleOptions.paddleHeight) / 2,
       "blue",
       KEYS.a,
-      KEYS.z
+      KEYS.z,
+      2
     );
 
     this.score1 = new Score(this.width / 2 - 50, 30, 30); //location of score board
     this.score2 = new Score(this.width / 2 + 50, 30, 30);
 
-    this.ball = new Ball(8, this.width, this.height, "gold");
-    this.ball2 = new Ball(8, this.width, this.height, "white");
-    this.ball3 = new Ball(8, this.width, this.height, "white");
-    this.ball4 = new Ball(8, this.width, this.height, "white");
+    this.goldenball = new Goldenball(4, this.width, this.height, "gold");
+    this.ball2 = new Ball(12, this.width, this.height, "brown");
+    // this.ball3 = new Ball(12, this.width, this.height, "brown");
+    // this.ball4 = new Ball(12, this.width, this.height, "brown");
 
     document.addEventListener("keydown", event => {
       switch (event.key) {
@@ -70,6 +74,11 @@ export default class Game {
       return;
     }
 
+    // if (this.goldenball.goal()) {
+    //   console.log("Game Over!");
+    //   //enf game
+    // }
+
     this.gameElement.innerHTML = ""; //clear the html before appending to fix the render bug
     let svg = document.createElementNS(SVG_NS, "svg");
     svg.setAttributeNS(null, "width", this.width);
@@ -79,10 +88,10 @@ export default class Game {
     this.board.render(svg);
     this.player1.render(svg);
     this.player2.render(svg);
-    this.ball.render(svg, this.player1, this.player2);
+    this.goldenball.render(svg, this.player1, this.player2);
     this.ball2.render(svg, this.player1, this.player2); //can call mega ball here.
-    this.ball3.render(svg, this.player1, this.player2);
-    this.ball4.render(svg, this.player1, this.player2);
+    // this.ball3.render(svg, this.player1, this.player2);
+    // this.ball4.render(svg, this.player1, this.player2);
 
     this.score1.render(svg, this.player1.score);
     this.score2.render(svg, this.player2.score);

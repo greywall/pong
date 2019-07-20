@@ -11,5 +11,5 @@ export const KEYS = {
 export const PaddleOptions = {
   paddleWidth: 8,
   paddleHeight: 56,
-  boardGap: 10
+  boardGap: 50
 };

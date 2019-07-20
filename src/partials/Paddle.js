@@ -9,18 +9,22 @@ export default class Paddle {
     y,
     color = "green",
     upKey,
-    downKey
+    downKey,
+    id
   ) {
     this.boardHeight = boardHeight;
     this.width = width;
     this.height = height;
     this.x = x;
     this.y = y;
-    this.speed = 10;
+    this.speed = 5;
     this.score = 0;
     this.color = color;
     this.upKey = upKey;
     this.downKey = downKey;
+
+    this.id = id;
+    // this.playerName = playerName;
 
     this.keyState = {};
 

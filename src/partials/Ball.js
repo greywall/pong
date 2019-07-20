@@ -77,20 +77,20 @@ export default class Ball {
   }
 
   goal(player) {
-    player.score++;
+    player.score += 10;
 
     // console.log(player1.score);
     this.reset();
   }
 
   render(svg, player1, player2) {
-    //need to add player 1, player 2
+    //need to add player 1, player 2, this colors the ball movement.
     this.x += this.vx; //+= this.ax
     this.y += this.vy;
 
-    // console.log(player1);
-
     this.wallCollision();
+
+    
     this.paddleCollision(player1, player2);
 
     let circle = document.createElementNS(SVG_NS, "circle");
