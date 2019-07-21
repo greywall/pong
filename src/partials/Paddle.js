@@ -17,7 +17,7 @@ export default class Paddle {
     this.height = height;
     this.x = x;
     this.y = y;
-    this.speed = 5;
+    this.speed = 10;
     this.score = 0;
     this.color = color;
     this.upKey = upKey;

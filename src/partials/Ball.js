@@ -6,7 +6,7 @@ export default class Ball {
     this.radius = radius;
     this.boardWidth = boardWidth;
     this.boardHeight = boardHeight;
-    this.direction = 1;
+    this.direction = -1;
     this.color = color;
 
     this.ping = new Audio(pingSound);
@@ -36,10 +36,10 @@ export default class Ball {
 
     if (hitleft || hitright) {
       // this.vx = -this.vx;
-      this.vx *= -1;
+      this.vx *= -1.01;
       // this.ax *= -1;
     } else if (hittop || hitbottom) {
-      this.vy *= -1;
+      this.vy *= -1.01;
     }
   }
 
@@ -90,7 +90,6 @@ export default class Ball {
 
     this.wallCollision();
 
-    
     this.paddleCollision(player1, player2);
 
     let circle = document.createElementNS(SVG_NS, "circle");

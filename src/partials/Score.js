@@ -1,4 +1,6 @@
 import { SVG_NS } from "../settings";
+import Ball from "./Ball";
+import Goldenball from "./Goldenball";
 
 export default class Score {
   constructor(x, y, size) {

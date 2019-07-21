@@ -6,6 +6,13 @@ export default class Goldenball extends Ball {
     super(...args);
   }
 
+  //   ballCollision (ball2) {
+  //     if () {
+  //         //collision detection
+  //         if ()
+
+  //     }
+
   goal(player) {
     player.score += 100;
     // if (player.score >= 250) {
