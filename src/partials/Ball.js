@@ -14,6 +14,12 @@ export default class Ball {
     this.reset();
   }
 
+  winner() {
+    if (this.player.score >= 1000) {
+      prompt("Winner Winner Chicken Dinner!");
+    }
+  }
+
   reset() {
     this.x = this.boardWidth / 2;
     this.y = this.boardHeight / 2;
@@ -78,6 +84,7 @@ export default class Ball {
 
   goal(player) {
     player.score += 10;
+    // winner();
 
     // console.log(player1.score);
     this.reset();
