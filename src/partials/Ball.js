@@ -17,7 +17,7 @@ export default class Ball {
   winner() {
     if (this.player.score >= 1000) {
       prompt("Winner Winner Chicken Dinner!");
-    }
+    } 
   }
 
   reset() {
@@ -84,11 +84,13 @@ export default class Ball {
 
   goal(player) {
     player.score += 10;
-    // winner();
-
-    // console.log(player1.score);
+     if (player.score <= 4000) {
+    // player.score += 10;
     this.reset();
+  } else {alert(`${player.id} wins with ${player.score} points`);
+}
   }
+      
 
   render(svg, player1, player2) {
     //need to add player 1, player 2, this colors the ball movement.

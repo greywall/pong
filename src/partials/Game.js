@@ -32,7 +32,7 @@ export default class Game {
       "red",
       KEYS.up,
       KEYS.down,
-      1
+      "Gryffindor"
     );
 
     this.player2 = new Paddle(
@@ -44,7 +44,7 @@ export default class Game {
       "blue",
       KEYS.a,
       KEYS.z,
-      2
+      "Slytherin"
     );
 
     this.score1 = new Score(this.width / 2 - 50, 30, 30); //location of score board
