@@ -23,16 +23,21 @@ export default class Game {
     //this.gameball = false
     //this.gameball = true
 
+  let playerOneScore = 0
+  let playerTwoScore = 0
+
+
     this.player1 = new Paddle(
       this.height, //board height
       PaddleOptions.paddleWidth,
       PaddleOptions.paddleHeight,
       PaddleOptions.boardGap,
       (this.height - PaddleOptions.paddleHeight) / 2,
-      "red",
+    
+      "#ecb939",
       KEYS.up,
       KEYS.down,
-      "Gryffindor"
+      "Hufflepuff"
     );
 
     this.player2 = new Paddle(
@@ -41,14 +46,15 @@ export default class Game {
       PaddleOptions.paddleHeight,
       this.width - (PaddleOptions.boardGap + PaddleOptions.paddleWidth),
       (this.height - PaddleOptions.paddleHeight) / 2,
-      "blue",
+    
+      "#222f5b",
       KEYS.a,
       KEYS.z,
-      "Slytherin"
+      "Ravenclaw"
     );
 
-    this.score1 = new Score(this.width / 2 - 50, 30, 30); //location of score board
-    this.score2 = new Score(this.width / 2 + 50, 30, 30);
+    this.score1 = new Score(this.width / 2 - 70, 30, 30); //location of score board
+    this.score2 = new Score(this.width / 2 + 70, 30, 30);
 
     this.goldenball = new Goldenball(4, this.width, this.height, "gold");
     this.ball2 = new Ball(12, this.width, this.height, "brown");
@@ -76,7 +82,7 @@ export default class Game {
 
     // if (this.goldenball.goal()) {
     //   console.log("Game Over!");
-    //   //enf game
+    
     // }
 
     this.gameElement.innerHTML = ""; //clear the html before appending to fix the render bug

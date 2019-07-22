@@ -14,11 +14,6 @@ export default class Ball {
     this.reset();
   }
 
-  winner() {
-    if (this.player.score >= 1000) {
-      prompt("Winner Winner Chicken Dinner!");
-    } 
-  }
 
   reset() {
     this.x = this.boardWidth / 2;
@@ -45,7 +40,7 @@ export default class Ball {
       this.vx *= -1.01;
       // this.ax *= -1;
     } else if (hittop || hitbottom) {
-      this.vy *= -1.01;
+      this.vy *= -1.;
     }
   }
 
@@ -64,6 +59,7 @@ export default class Ball {
       ) {
         // if true then there's a collision
         this.vx *= -1;
+        this.vy -= -1.15;
 
         this.ping.play();
         //this.player1.height -=-5 this will decrease player1s height for hitting the ball. //or change player color after hit, player1.height -=5; setTimeout(function()) {reset color,} 200
@@ -77,18 +73,23 @@ export default class Ball {
         (this.y >= player1.y && this.y <= player1.y + player1.height)
       ) {
         this.vx *= -1;
+        this.vy -= -1.05;
         this.ping.play();
       }
     }
   }
 
-  goal(player) {
+  goal(player, score) {
     player.score += 10;
-     if (player.score <= 4000) {
-    // player.score += 10;
     this.reset();
-  } else {alert(`${player.id} wins with ${player.score} points`);
-}
+    console.log("player id ", player.id);
+    
+    if (player.score <= 500) {
+      
+      this.reset();
+    } else {alert(`${player.id} wins with ${player.score} points`);
+    
+  }
   }
       
 
@@ -117,6 +118,18 @@ export default class Ball {
     } else if (leftGoal) {
       this.goal(player2);
       this.direction = -1;
+    }
+
+    if (rightGoal && player1.score >= 500) {
+      
+      player1.score = 0;
+      player2.score = 0;
+      this.reset();
+    } else if (leftGoal && player2.score >= 500) {
+      
+      player1.score = 0;
+      player2.score = 0;
+      this.reset();
     }
   }
 }

@@ -13,24 +13,29 @@ export default class Goldenball extends Ball {
 
   //     }
 
-  // let playerOneScore = this.score
-  // let playerTwoScore = this.score
-
-  goal(player) {
+  goal(player, score) {
     player.score += 100;
+    this.reset();
+    console.log("player id ", player.id);
     
     if (player.score <= 500) {
       
       this.reset();
     } else {alert(`${player.id} wins with ${player.score} points`);
-    // player.score = 0; need to create a let that targets each person's score.
-    
-
+   
   }
-
+  //     this.goal(player1);
+  //     this.player.score = 0;
+  //   } else if (leftGoal) {
+  //     this.goal(player2);
+  //     this.player.score = 0;
+  //   }  
+    
+  // }
+  }
     //   console.log(player.player1.player.score);
 
-    console.log("player id ", player.id);
+   
     // if (player.score == player2.score && player.score <= 250) {
     //   this.reset();
     // } else if (player1.score > player2.score) {
@@ -38,5 +43,5 @@ export default class Goldenball extends Ball {
     // } else {
     //   console.log("Player 2 is the winner");
     // }
-  }
+  
 }

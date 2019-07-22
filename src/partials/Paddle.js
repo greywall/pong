@@ -48,6 +48,8 @@ export default class Paddle {
     });
   }
 
+  
+
   up() {
     // this.y = this.y - this.speed;
     console.log("move up");
