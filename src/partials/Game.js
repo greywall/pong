@@ -16,15 +16,7 @@ export default class Game {
     this.gameElement = document.getElementById(this.element);
     this.board = new Board(this.width, this.height);
 
-    // this.paddleWidth = 8;
-    // this.paddleHeight = 56;
-    // this.boardGap = 10;
-
-    //this.gameball = false
-    //this.gameball = true
-
-  let playerOneScore = 0
-  let playerTwoScore = 0
+  
 
 
     this.player1 = new Paddle(
@@ -53,13 +45,11 @@ export default class Game {
       "Ravenclaw"
     );
 
-    this.score1 = new Score(this.width / 2 - 70, 30, 30); //location of score board
-    this.score2 = new Score(this.width / 2 + 70, 30, 30);
+    this.score1 = new Score(this.width / 2 - 90, 30, 30); //location of score board
+    this.score2 = new Score(this.width / 2 + 30, 30, 30);
 
     this.goldenball = new Goldenball(4, this.width, this.height, "gold");
-    this.ball2 = new Ball(12, this.width, this.height, "brown");
-    // this.ball3 = new Ball(12, this.width, this.height, "brown");
-    // this.ball4 = new Ball(12, this.width, this.height, "brown");
+    this.ball2 = new Ball(12, this.width, this.height, "#654321");
 
     document.addEventListener("keydown", event => {
       switch (event.key) {
@@ -69,21 +59,14 @@ export default class Game {
       }
     });
 
-    // this.player1 = new Paddle(this.height, 8, 56, 10,100, '#f69d3c' );
-    // this.player2 = new Paddle(this.height, 8, 56, 494,100,'#3f87a6');
+   
   } //end of constructor
 
-  //mega pong write method for spawning additonal balls. use an array of new ball objects and use a for.Each() to render each ball.
 
   render() {
     if (this.pause) {
       return;
     }
-
-    // if (this.goldenball.goal()) {
-    //   console.log("Game Over!");
-    
-    // }
 
     this.gameElement.innerHTML = ""; //clear the html before appending to fix the render bug
     let svg = document.createElementNS(SVG_NS, "svg");
@@ -95,9 +78,7 @@ export default class Game {
     this.player1.render(svg);
     this.player2.render(svg);
     this.goldenball.render(svg, this.player1, this.player2);
-    this.ball2.render(svg, this.player1, this.player2); //can call mega ball here.
-    // this.ball3.render(svg, this.player1, this.player2);
-    // this.ball4.render(svg, this.player1, this.player2);
+    this.ball2.render(svg, this.player1, this.player2); 
 
     this.score1.render(svg, this.player1.score);
     this.score2.render(svg, this.player2.score);

@@ -14,6 +14,7 @@ export default class Ball {
     this.reset();
   }
 
+  
 
   reset() {
     this.x = this.boardWidth / 2;
@@ -28,6 +29,7 @@ export default class Ball {
     this.vx = this.direction * (6 - Math.abs(this.vy));
     console.log("vx", this.vx);
   }
+
 
   wallCollision() {
     const hitleft = this.x - this.radius <= 0;
@@ -73,7 +75,7 @@ export default class Ball {
         (this.y >= player1.y && this.y <= player1.y + player1.height)
       ) {
         this.vx *= -1;
-        this.vy -= -1.05;
+        this.vy -= -1.15;
         this.ping.play();
       }
     }

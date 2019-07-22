@@ -6,13 +6,6 @@ export default class Goldenball extends Ball {
     super(...args);
   }
 
-  //   ballCollision (ball2) {
-  //     if () {
-  //         //collision detection
-  //         if ()
-
-  //     }
-
   goal(player, score) {
     player.score += 100;
     this.reset();
@@ -21,27 +14,10 @@ export default class Goldenball extends Ball {
     if (player.score <= 500) {
       
       this.reset();
-    } else {alert(`${player.id} wins with ${player.score} points`);
-   
-  }
-  //     this.goal(player1);
-  //     this.player.score = 0;
-  //   } else if (leftGoal) {
-  //     this.goal(player2);
-  //     this.player.score = 0;
-  //   }  
+    } else {alert(`${player.id} wins the Hogwarts Quidditch Cup with ${player.score} points`);
     
-  // }
+ 
   }
-    //   console.log(player.player1.player.score);
-
-   
-    // if (player.score == player2.score && player.score <= 250) {
-    //   this.reset();
-    // } else if (player1.score > player2.score) {
-    //   console.log("Player 1 is the winner");
-    // } else {
-    //   console.log("Player 2 is the winner");
-    // }
   
+}
 }
