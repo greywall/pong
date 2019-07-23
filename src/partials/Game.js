@@ -59,7 +59,7 @@ export default class Game {
       }
     });
 
-   
+    this.firstScreen =  true;
   } //end of constructor
 
 
@@ -67,6 +67,8 @@ export default class Game {
     if (this.pause) {
       return;
     }
+
+
 
     this.gameElement.innerHTML = ""; //clear the html before appending to fix the render bug
     let svg = document.createElementNS(SVG_NS, "svg");

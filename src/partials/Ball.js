@@ -10,7 +10,7 @@ export default class Ball {
     this.color = color;
 
     this.ping = new Audio(pingSound);
-
+    this.count = 120;
     this.reset();
   }
 
@@ -39,10 +39,10 @@ export default class Ball {
 
     if (hitleft || hitright) {
       // this.vx = -this.vx;
-      this.vx *= -1.01;
+      this.vx *= -1;
       // this.ax *= -1;
     } else if (hittop || hitbottom) {
-      this.vy *= -1.;
+      this.vy *= -1;
     }
   }
 
@@ -60,8 +60,13 @@ export default class Ball {
         (this.y >= player2.y && this.y <= player2.y + player2.height) // ball Y is >= paddle top Y and <= paddle bottom Y
       ) {
         // if true then there's a collision
-        this.vx *= -1;
-        this.vy -= -1.15;
+        this.vx *= -1.02;
+        this.vy -= Math.random() - 2;
+
+        this.ping.play();
+        // this.vy -= -1.15;
+      
+        
 
         this.ping.play();
         //this.player1.height -=-5 this will decrease player1s height for hitting the ball. //or change player color after hit, player1.height -=5; setTimeout(function()) {reset color,} 200
@@ -74,8 +79,9 @@ export default class Ball {
         this.x - this.radius >= player1.x &&
         (this.y >= player1.y && this.y <= player1.y + player1.height)
       ) {
-        this.vx *= -1;
-        this.vy -= -1.15;
+        this.vx *= -1.02;
+        this.vy -= Math.random() - 2;
+        
         this.ping.play();
       }
     }
@@ -83,7 +89,11 @@ export default class Ball {
 
   goal(player, score) {
     player.score += 10;
+    this.count = 0;
+
     this.reset();
+
+  
     console.log("player id ", player.id);
     
     if (player.score <= 500) {
@@ -96,6 +106,12 @@ export default class Ball {
       
 
   render(svg, player1, player2) {
+
+      this.count ++;
+      if (this.count <= 120) {
+        this.reset();
+      }
+
     //need to add player 1, player 2, this colors the ball movement.
     this.x += this.vx; //+= this.ax
     this.y += this.vy;
@@ -133,5 +149,7 @@ export default class Ball {
       player2.score = 0;
       this.reset();
     }
+
+
   }
 }
